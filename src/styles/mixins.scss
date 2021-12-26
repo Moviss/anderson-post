@@ -1,0 +1,100 @@
+@import "./fonts";
+@import "./variables";
+
+// Typography
+@mixin category-font {
+  font-family: EuclidCircularBRegular, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: $dark1;
+}
+
+@mixin navigation-font {
+  font-family: $poppins-medium;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: $dark1;
+}
+
+@mixin header-font($color: $dark1, $letter-spacing: 0.15em) {
+  font-family: $poppins-bold;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: $color;
+  letter-spacing: $letter-spacing;
+}
+
+@mixin title-hero-font {
+  font-family: $poppins-bold;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+  color: $dark1;
+}
+
+@mixin content-font {
+  font-family: $poppins-regular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 21px;
+  color: $dark2;
+}
+
+@mixin hero-date-font {
+  font-family: $poppins-light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 18px;
+  color: $dark3;
+}
+
+@mixin list-title-font {
+  font-family: $poppins-semi-bold;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: $dark1;
+}
+
+@mixin list-meta-font {
+  font-family: $poppins-light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 18px;
+  color: $dark3;
+}
+
+// Media queries
+$tablet: 768;
+$large: 1024;
+$desktop: 1280;
+
+@mixin tablet {
+  @media only screen and (min-width: $tablet * 1px) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media only screen and (min-width: $large * 1px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: $desktop * 1px) {
+    @content;
+  }
+}
