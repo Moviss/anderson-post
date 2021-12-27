@@ -3,8 +3,17 @@
 .newsList {
   padding: 16px;
   height: 100%;
+  position: relative;
 
   @include large {
     padding: 0;
+  }
+
+  .error {
+    @include list-title-font;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
