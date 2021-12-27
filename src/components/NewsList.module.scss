@@ -1,0 +1,10 @@
+@import "../styles/index";
+
+.newsList {
+  padding: 16px;
+  height: 100%;
+
+  @include large {
+    padding: 0;
+  }
+}

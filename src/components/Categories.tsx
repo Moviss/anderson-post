@@ -1,15 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import styles from './Categories.module.scss';
-
-enum CategoriesList {
-  Business = 'Business',
-  Entertainment = 'Entertainment',
-  General = 'General',
-  Health = 'Health',
-  Science = 'Science',
-  Sports = 'Sports',
-  Technology = 'Technology',
-}
+import { CategoriesList } from '../types/Categories';
 
 const categories: CategoriesList[] = [
   CategoriesList.Business,
@@ -22,7 +13,7 @@ const categories: CategoriesList[] = [
 ];
 
 interface CategoriesProps {
-  setCurrentCategory: Dispatch<SetStateAction<string>>;
+  setCurrentCategory: Dispatch<SetStateAction<"" | CategoriesList>>;
 }
 
 

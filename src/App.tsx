@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Categories from './components/Categories';
+import NewsList from './components/NewsList';
+import { CategoriesList } from './types/Categories';
 
 function App() {
-  const [currentCategory, setCurrentCategory] = useState('Breaking News');
+  const [currentCategory, setCurrentCategory] = useState<CategoriesList | ''>('');
 
   return (
     <div>
@@ -11,8 +13,9 @@ function App() {
       <div className="content">
         <Categories setCurrentCategory={setCurrentCategory} />
         <section className="category">
-          <div>{currentCategory}</div>
+          <div>{currentCategory ? currentCategory : 'Breaking News'}</div>
         </section>
+        <NewsList currentCategory={currentCategory} />
       </div>
     </div>
   );
