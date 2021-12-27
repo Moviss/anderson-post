@@ -13,7 +13,7 @@ const categories: CategoriesList[] = [
 ];
 
 interface CategoriesProps {
-  setCurrentCategory: Dispatch<SetStateAction<"" | CategoriesList>>;
+  setCurrentCategory: Dispatch<SetStateAction<"Breaking News" | CategoriesList>>;
 }
 
 

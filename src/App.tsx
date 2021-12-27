@@ -5,7 +5,7 @@ import NewsList from './components/NewsList';
 import { CategoriesList } from './types/Categories';
 
 function App() {
-  const [currentCategory, setCurrentCategory] = useState<CategoriesList | ''>('');
+  const [currentCategory, setCurrentCategory] = useState<CategoriesList | 'Breaking News'>('Breaking News');
 
   return (
     <div>
@@ -13,7 +13,7 @@ function App() {
       <div className="content">
         <Categories setCurrentCategory={setCurrentCategory} />
         <section className="category">
-          <div>{currentCategory ? currentCategory : 'Breaking News'}</div>
+          <div>{currentCategory}</div>
         </section>
         <NewsList currentCategory={currentCategory} />
       </div>

@@ -1,0 +1,76 @@
+@import "../styles/index";
+
+.newsCardHero, .newsCard {
+  border-bottom: 1px solid $line;
+  padding-bottom: 20px;
+}
+
+.newsCardHero {
+  &__image {
+    img {
+      width: auto;
+      height: 311px;
+      max-width: 560px;
+    }
+  }
+
+  &__category {
+    @include header-font($red);
+    margin-top: 16px;
+  }
+
+  &__title {
+    @include title-hero-font;
+    margin-top: 8px;
+  }
+
+  &__description {
+    @include content-font;
+    margin-top: 8px;
+  }
+
+  &__meta {
+    @include hero-date-font;
+    margin-top: 8px;
+  }
+}
+
+.newsCard {
+  padding: 20px 0;
+  display: flex;
+
+  &:nth-of-type(even) {
+    flex-direction: row-reverse;
+  }
+
+  &__column {
+    width: 260px;
+    max-width: 260px;
+  }
+
+  .space {
+    width: 40px;
+  }
+
+  &__image {
+    img {
+      width: 260px;
+      height: 146px;
+    }
+  }
+
+  &__category {
+    @include header-font($red);
+    margin-top: 8px;
+  }
+
+  &__title {
+    @include list-title-font;
+    margin-top: 8px;
+  }
+
+  &__meta {
+    @include list-meta-font;
+    margin-top: 8px;
+  }
+}
