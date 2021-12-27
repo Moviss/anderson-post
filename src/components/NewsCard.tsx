@@ -24,9 +24,9 @@ const NewsCard = ({ news, isHero, currentCategory }: NewsCardProps) => {
         <div className={styles.newsCardHero__category}>
           TOP STORY
         </div>
-        <div className={styles.newsCardHero__title}>
+        <a className={styles.newsCardHero__title} href={news.url}>
           {news.title}
-        </div>
+        </a>
         <div className={styles.newsCardHero__description}>
           {news.description}
         </div>

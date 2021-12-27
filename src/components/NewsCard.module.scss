@@ -2,15 +2,32 @@
 
 .newsCardHero, .newsCard {
   border-bottom: 1px solid $line;
-  padding-bottom: 20px;
+  padding-bottom: 16px;
+  max-width: calc(100vw - 32px);
+
+  @include large {
+    padding-bottom: 20px;
+    max-width: unset;
+  }
+
+  a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .newsCardHero {
   &__image {
     img {
-      width: auto;
-      height: 311px;
-      max-width: 560px;
+      max-width: calc(100vw - 32px);
+      max-height:100%;
+
+      @include large {
+        width: 560px;
+        height: auto;
+        max-width: 560px;
+      }
+
     }
   }
 
@@ -36,26 +53,50 @@
 }
 
 .newsCard {
-  padding: 20px 0;
+  padding: 16px 0;
   display: flex;
+  flex-direction: column;
+
+  @include large {
+    padding: 20px 0;
+    flex-direction: row;
+  }
 
   &:nth-of-type(even) {
-    flex-direction: row-reverse;
+    @include large {
+      flex-direction: row-reverse;
+    }
   }
 
   &__column {
-    width: 260px;
-    max-width: 260px;
+    width: 100%;
+    max-width: calc(100vw - 32px);
+
+    @include large {
+      width: 260px;
+      max-width: 260px;
+    }
+
   }
 
   .space {
-    width: 40px;
+    display: none;
+
+    @include large {
+      display: block;
+      width: 40px;
+    }
   }
 
   &__image {
     img {
-      width: 260px;
-      height: 146px;
+      width: calc(100vw - 32px);
+      max-height: 183px;
+
+      @include large {
+        width: 260px;
+        height: 146px;
+      }
     }
   }
 
