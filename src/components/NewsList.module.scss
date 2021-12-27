@@ -11,9 +11,19 @@
 
   .info {
     @include list-title-font;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    text-align: center;
   }
+}
+
+.loadMoreBtn {
+  cursor: pointer;
+  margin: 20px auto;
+  @include header-font($red);
+  padding: 8px 0;
+  border: 1px solid $red;
+  border-radius: 18px;
+  width: 142px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

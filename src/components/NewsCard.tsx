@@ -11,10 +11,10 @@ interface NewsCardProps {
   news: Article;
   isHero: boolean;
   currentCategory: CategoriesList | String;
-  key: string;
+  key?: string;
 }
 
-const NewsCard = ({ news, isHero, currentCategory, key }: NewsCardProps) => {
+const NewsCard = ({ news, isHero, currentCategory }: NewsCardProps) => {
   if (isHero) {
     return (
       <article className={`${styles.newsCardHero}`}>

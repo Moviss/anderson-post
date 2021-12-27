@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './NewsList.module.scss';
 import axios from 'axios';
 import { Article } from '../types/News';
@@ -15,35 +15,75 @@ const NewsList = ({ currentCategory }: NewsListProps) => {
   const [newsData, setNewsData] = useState<Array<Article> | []>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const fetchNews = async () => {
-    setIsLoading(true);
-    // eslint-disable-next-line no-template-curly-in-string
-    await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=us${currentCategory !==
-      'Breaking News'
-        ? '&category=' + currentCategory
-        : ''}&pageSize=11&page=1&apiKey=${APIKEY}`).then(result => {
-      setHasError(false);
-      setNewsData(result.data.articles);
-    }).catch(err => setHasError(true)).finally(() => setIsLoading(false));
+  function usePrevious(value: any) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
+
+  const prevCategory = usePrevious(currentCategory);
+
+  const loadMore = () => {
+    setCurrentPage(currentPage => currentPage + 1);
   };
 
   useEffect(() => {
-    fetchNews();
-  }, [currentCategory]);
+    const fetchNews = async () => {
+      let loadingMore = true;
+      setIsLoading(true);
+      if(prevCategory !== currentCategory) {
+        await setNewsData([]);
+        await setCurrentPage(1);
+        loadingMore = false;
+      }
+      // eslint-disable-next-line no-template-curly-in-string
+      await axios.get(
+        `https://newsapi.org/v2/top-headlines?country=us${currentCategory !==
+        'Breaking News'
+          ? '&category=' + currentCategory
+          : ''}&pageSize=10&page=${currentPage}&apiKey=${APIKEY}`).
+        then(result => {
+          setHasError(false);
+          if (loadingMore) {
+            setNewsData(prevData => [...prevData, ...result.data.articles]);
+          } else {
+            setNewsData(result.data.articles);
+          }
+
+        });
+    };
+
+    fetchNews().
+      catch(err => setHasError(true)).
+      finally(() => setIsLoading(false));
+  }, [currentCategory, currentPage]);
 
   return (
-    <section className={styles.newsList}>
-      {hasError && !isLoading &&
-      <div className={styles.info}>Some error occurred.</div>}
+    <>
+      <section className={styles.newsList}>
+        <>
+          {newsData.map(
+            (newsItem, index) => (
+              <NewsCard isHero={index === 0} news={newsItem}
+                        currentCategory={currentCategory}
+                        key={newsItem.title}/>
+            ))}
 
-      {(!isLoading) ? newsData.map(
-        (newsItem, index) => (<NewsCard isHero={index === 0} news={newsItem}
-                                        currentCategory={currentCategory}
-                                        key={newsItem.title}/>)) : <div
-        className={styles.info}>Loading news...</div>}
-    </section>
+          {hasError && !isLoading &&
+          <div className={styles.info}>Some error occurred when fetching fresh news.</div>}
+
+          <div onClick={() => loadMore()}
+               className={styles.loadMoreBtn}>{isLoading
+            ? 'Loading...'
+            : 'LOAD MORE'}
+          </div>
+        </>
+      </section>
+    </>
   );
 };
 
