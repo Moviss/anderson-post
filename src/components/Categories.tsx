@@ -1,19 +1,36 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from './Categories.module.scss';
 
-const categories = [
-  'Business',
-  'Entertainment',
-  'General',
-  'Health',
-  'Science',
-  'Sports',
-  'Technology'];
+enum CategoriesList {
+  Business = 'Business',
+  Entertainment = 'Entertainment',
+  General = 'General',
+  Health = 'Health',
+  Science = 'Science',
+  Sports = 'Sports',
+  Technology = 'Technology',
+}
 
-function Categories () {
+const categories: CategoriesList[] = [
+  CategoriesList.Business,
+  CategoriesList.Entertainment,
+  CategoriesList.General,
+  CategoriesList.Health,
+  CategoriesList.Science,
+  CategoriesList.Sports,
+  CategoriesList.Technology,
+];
+
+interface CategoriesProps {
+  setCurrentCategory: Dispatch<SetStateAction<string>>;
+}
+
+
+function Categories ({ setCurrentCategory }: CategoriesProps) {
   return (
     <section className={styles.categories}>
-      {categories.map(category => <div className={styles.categories__item}>{category}</div>)}
+      {categories.map(category => <div onClick={() => setCurrentCategory(CategoriesList[category])} className={styles.categories__item}
+                                       key={category}>{category}</div>)}
     </section>
   );
 }
