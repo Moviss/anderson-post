@@ -1,5 +1,6 @@
 @import "./fonts";
 @import "./variables";
+@import"./mixins";
 
 //noinspection CssInvalidAtRule
 @import-normalize;
@@ -14,4 +15,10 @@ body {
   font-family: 'PoppinsRegular', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  background-color: $white;
+}
+
+#root {
+  height: 100%;
 }

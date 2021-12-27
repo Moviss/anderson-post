@@ -1,0 +1,68 @@
+@import "../styles/index";
+
+.header {
+  height: $header-height;
+  display: flex;
+  border-bottom: 1px solid $line;
+  position: relative;
+
+  &__hamburger, &__search, &__menu {
+    align-self: center;
+  }
+
+  &__hamburger {
+    padding-left: 18px;
+    margin-bottom: -4px;
+
+    @include large {
+      display: none;
+    }
+  }
+
+  &__search {
+    margin-left: auto;
+    justify-self: end;
+    padding-right: 17px;
+    margin-bottom: -4px;
+
+    @include large {
+      margin-left: 0;
+      padding-right: 41px;
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__menu {
+    display: none;
+
+    @include large {
+      display: flex;
+      margin-left: auto;
+      justify-self: end;
+    };
+  }
+}
+
+.nav {
+  list-style-type: none;
+
+  &__item {
+    display: inline-block;
+    margin-right: $space-menu;
+    @include navigation-font;
+
+    &--subscribe {
+      color: $white;
+      background-color: $red;
+      padding: 4px 16px;
+      line-height: 20px;
+      border-radius: 14px;
+    }
+  }
+}
