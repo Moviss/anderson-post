@@ -48,9 +48,9 @@ const NewsCard = ({ news, isHero, currentCategory }: NewsCardProps) => {
           <div className={styles.newsCard__category}>
             {currentCategory}
           </div>
-          <div className={styles.newsCard__title}>
+          <a className={styles.newsCard__title} href={news.url}>
             {news.title}
-          </div>
+          </a>
           <div className={styles.newsCard__meta}>
             {news.author} • {dayjs(news.publishedAt).format('MMMM DD, YYYY')}
           </div>
