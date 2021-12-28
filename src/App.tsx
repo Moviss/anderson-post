@@ -11,7 +11,7 @@ function App() {
     <div>
       <Header />
       <div className="content">
-        <Categories setCurrentCategory={setCurrentCategory} />
+        <Categories setCurrentCategory={setCurrentCategory} currentCategory={currentCategory} />
         <section className="category">
           <div>{currentCategory}</div>
         </section>

@@ -33,5 +33,10 @@
     &:hover {
       color: $dark3;
     }
+
+    &--selected {
+      color: $red;
+      text-decoration:underline;
+    }
   }
 }

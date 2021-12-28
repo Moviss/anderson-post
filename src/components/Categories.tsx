@@ -13,15 +13,19 @@ const categories: CategoriesList[] = [
 ];
 
 interface CategoriesProps {
-  setCurrentCategory: Dispatch<SetStateAction<"Breaking News" | CategoriesList>>;
+  setCurrentCategory: Dispatch<SetStateAction<'Breaking News' | CategoriesList>>;
+  currentCategory: CategoriesList | 'Breaking News';
 }
 
-
-function Categories ({ setCurrentCategory }: CategoriesProps) {
+function Categories ({ setCurrentCategory, currentCategory }: CategoriesProps) {
   return (
     <section className={styles.categories}>
-      {categories.map(category => <div onClick={() => setCurrentCategory(CategoriesList[category])} className={styles.categories__item}
-                                       key={category}>{category}</div>)}
+      {categories.map(category => <div
+        onClick={() => setCurrentCategory(CategoriesList[category])}
+        className={`${styles.categories__item} ${currentCategory === category
+          ? styles['categories__item--selected']
+          : ''}`}
+        key={category}>{category}</div>)}
     </section>
   );
 }
