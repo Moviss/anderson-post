@@ -1,6 +1,4 @@
-# Anderson Post - Storm Ideas Tech Test
-
-I implemented all the required features.
+# Anderson Post
 
 Technologies used:
 
