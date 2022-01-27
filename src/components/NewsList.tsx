@@ -5,11 +5,13 @@ import { Article } from '../types/News';
 import { CategoriesList } from '../types/Categories';
 import NewsCard from './NewsCard';
 
-interface NewsListProps {
-  currentCategory: 'Breaking News' | CategoriesList;
-}
-
+const BREAKING_NEWS = 'Breaking News';
+const API_URL = 'https://newsapi.org/v2/top-headlines?country=us';
 const APIKEY = '9abf605c94544df181133c876281ec23';
+
+interface NewsListProps {
+  currentCategory: typeof BREAKING_NEWS | CategoriesList;
+}
 
 const NewsList = ({ currentCategory }: NewsListProps) => {
   const [newsData, setNewsData] = useState<Array<Article> | []>([]);
@@ -17,7 +19,7 @@ const NewsList = ({ currentCategory }: NewsListProps) => {
   const [hasError, setHasError] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  function usePrevious(value: any) {
+  function usePrevious (value: any) {
     const ref = useRef();
     useEffect(() => {
       ref.current = value;
@@ -35,18 +37,18 @@ const NewsList = ({ currentCategory }: NewsListProps) => {
     const fetchNews = async () => {
       let loadingMore = true;
       setIsLoading(true);
-      if(prevCategory !== currentCategory) {
+      if (prevCategory !== currentCategory) {
         await setNewsData([]);
         await setCurrentPage(1);
         loadingMore = false;
       }
       // eslint-disable-next-line no-template-curly-in-string
       await axios.get(
-        `https://newsapi.org/v2/top-headlines?country=us${currentCategory !==
-        'Breaking News'
+        `${API_URL}${currentCategory !==
+        BREAKING_NEWS
           ? '&category=' + currentCategory
-          : ''}&pageSize=10&page=${currentPage}&apiKey=${APIKEY}`).
-        then(result => {
+          : ''}&pageSize=10&page=${currentPage}&apiKey=${APIKEY}`)
+        .then(result => {
           setHasError(false);
           if (loadingMore) {
             setNewsData(prevData => [...prevData, ...result.data.articles]);
@@ -57,9 +59,9 @@ const NewsList = ({ currentCategory }: NewsListProps) => {
         });
     };
 
-    fetchNews().
-      catch(err => setHasError(true)).
-      finally(() => setIsLoading(false));
+    fetchNews()
+      .catch(err => setHasError(true))
+      .finally(() => setIsLoading(false));
   }, [currentCategory, currentPage]);
 
   return (
@@ -74,7 +76,8 @@ const NewsList = ({ currentCategory }: NewsListProps) => {
             ))}
 
           {hasError && !isLoading &&
-          <div className={styles.info}>Some error occurred when fetching fresh news.</div>}
+          <div className={styles.info}>Some error occurred when fetching fresh
+            news.</div>}
 
           <div onClick={() => loadMore()}
                className={styles.loadMoreBtn}>{isLoading
